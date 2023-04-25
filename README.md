@@ -7,7 +7,7 @@
 5. `Task 4` - `use a local buffer of 1024 chars in order to call write as little as possible`
 6. `Task 5` - `handle the following custom conversion specifier s`
 7. `Task 6` - `handle the following conversion specifier p`
-8. `Task 7` - `handle the following flag characters for non-custom conversion specifiers +, space and #`
+8. `Task 7` - `handle the following flag characters for non-custom conversion specifiers`
 9. `Task 8` - `handle the following length modifiers for non-custom conversion specifiers l and h`
 10. `Task 9`  - `handle the field width for non-custom conversion specifiers`
 11. `Task 10` - `handle the precision for non-custom conversion specifiers`

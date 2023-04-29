@@ -56,7 +56,7 @@ int print_rot13(va_list ap, params_t *params)
 {
 	int i, index;
 	int count = 0;
-	char arr[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ      abcdefghijklmnopqrstuvwxyz";
+	char arr[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ	abcdefghijklmnopqrstuvwxyz";
 	char *a = va_arg(ap, char *);
 	(void)params;
 

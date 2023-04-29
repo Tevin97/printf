@@ -32,3 +32,4 @@ char *get_precision(char *p, params_t *params, va_list ap)
 
 	return (p);
 }
+

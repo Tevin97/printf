@@ -8,10 +8,10 @@
  *
  *Return: bytes printed
  */
-int print_from_to(char *start, char *stop, params_t *params)
+int print_from_to(char *start, char *stop, char *except)
 {
 	int sum = 0;
-	(void)params;
+	(void)except;
 
 	while (start <= stop)
 	{

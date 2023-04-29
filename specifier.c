@@ -71,7 +71,7 @@ int get_flag(char *s, params_t *params)
 		case '+':
 		i = params->plus_flag = 1;
 		break;
-		case '\0':
+		case ' ':
 		i = params->space_flag = 1;
 		break;
 		case '#':
@@ -96,7 +96,7 @@ int get_flag(char *s, params_t *params)
 */
 int get_modifier(char *s, params_t *params)
 {
-	int i;
+	int i = 0;
 
 	switch (*s)
 	{

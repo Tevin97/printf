@@ -11,10 +11,10 @@
 int print_from_to(char *start, char *stop, char *except)
 {
 	int sum = 0;
-	(void)except;
 
 	while (start <= stop)
 	{
+		if (start != except)
 		sum += _putchar(*start);
 		start++;
 	}

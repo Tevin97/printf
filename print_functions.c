@@ -53,12 +53,12 @@ int print_string(va_list ap, params_t *params)
 	char *str = va_arg(ap, char *), pad_char = ' ';
 	unsigned int pad = 0, sum = 0, i = 0, j;
 
-	if (!str)
-	{
-		str = "(null)";
-	}
+	(void)params;
+	switch ((int)(!str))
+	case l:
+		str = NULL_STRING;
 
-	j = pad = _strlen(str);
+		j = pad = _strlen(str);
 	if (params->precision < pad)
 		j = pad = params->precision;
 
@@ -110,8 +110,8 @@ int print_S(va_list ap, params_t *params)
 	char *hex;
 	int sum = 0;
 
-	if (!str)
-		return (_puts("(null)"));
+	if ((int)(!str))
+		return (_puts(NULL_STRING));
 	for (; *str; str++)
 	{
 		if ((*str > 0 && *str < 32) || *str >= 127)

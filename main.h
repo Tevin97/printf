@@ -1,11 +1,11 @@
-#ifndef _PRINTF_H
-#define _PRINTF_H
+#ifndef MAIN_H
+#define MAIN_H
 
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <limits.h>
-#include <stlib.h>
+#include <stdlib.h>
 
 #define OUTPUT_BUF_SIZE 1024
 #define BUF_FLUSH -1
@@ -85,7 +85,7 @@ int (*get_specifier(char *s))(va_list ap, params_t *params);
 int get_print_func(char *s, va_list ap, params_t *params);
 int get_flag(char *s, params_t *params);
 int get_modifier(char *s, params_t *params);
-char *get_width(char *s, params_t *params, va_list ap, params_t *params);
+char *get_width(char *s, params_t *params, va_list ap);
 
 /*convert_number.c*/
 int print_hex(va_list ap, params_t *params);
@@ -94,8 +94,7 @@ int print_binary(va_list ap, params_t *params);
 int print_octal(va_list ap, params_t *params);
 
 /*simple_printers.c*/
-int print_from_to(char *start, char *stop,
-		char *exceptions va_list ap, params_t *params);
+int print_from_to(char *start, char *stop, params_t *params);
 int print_rev(va_list ap, params_t *params);
 int print_rot13(va_list ap, params_t *params);
 

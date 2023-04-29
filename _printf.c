@@ -1,52 +1,71 @@
-#include "main.h"
-#include <ctype.h>
+#include 'main.h';
 
 /**
-*_printf - prints anything
-*@format: the format string
-*
-*Return: number of bytes printed
-*/
+ * _printf - prints output according to a format
+ * @format: format string containing zero or more directives
+ *
+ * Return: number of characters printed, or -1 if there is an error
+ */
+
 int _printf(const char *format, ...)
 {
-	int sum = 0;
-	va_list ap;
-	char *p, *start;
-	params_t params = PARAMS_INIT;
+	int i = 0, count = 0;
+	va_list args;
+	char c = va_arg(args, int);
+	int num = va_arg(args, int);
+	char *num_str = convert(num, 10, CONVERT_LOWERCASE, NULL);
+	char *str = va_arg(args, char *);
 
-
-	va_start(ap, format);
-
-	if (!format || (format[0] == '%' && !format[1]))
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
-	if (format[0] == '%' && isspace(format[1]) && !format[2])
-		return (-1);
-	for (p = (char *)format; *p; p++)
+	va_start(args, format);
+
+	while (format[i] != '\0')
 	{
-		init_params(&params, ap);
-		if (*p != '%')
+		if (format[i] != '%')
 		{
-			sum += _putchar(*p);
-			continue;
+			_putchar(format[i]);
+			count++;
 		}
-		start = p;
-		p++;
-		while (get_flag(p, &params))
-		{
-			p++;
-		}
-		p = get_width(p, &params, ap);
-		p = get_precision(p, &params, ap);
-		if (get_modifier(p, &params))
-			p++;
-
-		if (!get_specifier(p))
-			sum += print_from_to(start, p,
-					params.l_modifier || params.h_modifier ? p - 1 : 0);
 		else
-			sum += get_print_func(p, ap, &params);
+		{
+			i++;
+
+			if (format[i] == '%')
+			{
+				_putchar('%');
+				count++;
+			}
+			else if (format[i] == 'c')
+			{
+				_putchar(c);
+				count++;
+			}
+			else if (format[i] == 's')
+				if (str == NULL)
+				{
+					str = "(null)";
+				}
+			while (*str)
+			{
+				_putchar(*str++);
+				count++;
+			}
+			else if (format[i] == 'd' || format[i] == 'i')
+			{
+				print_from_to(num_str, num_str + _strlen(num_str), NULL);
+				count += _strlen(num_str);
+				free(num_str);
+			}
+			else
+			{
+				_putchar('%');
+				_putchar(format[i]);
+				count += 2;
+			}
+			i++;
+		}
 	}
-	_putchar(BUF_FLUSH);
-	va_end(ap);
-	return (sum);
+	va_end(args);
+	return (count);
 }

@@ -1,23 +1,21 @@
 #include "main.h"
 
 /**
-*print_from_to - print range of addresses
-*@start: start address
-*@stop: stop address
-*@except: except address
-*
-*Return: bytes printed
-*/
-int print_from_to(char *start, char *stop, char *except)
+ *print_from_to - print range of addresses
+ *@start: start address
+ *@stop: stop address
+ *@except: except address
+ *
+ *Return: bytes printed
+ */
+int print_from_to(char *start, char *stop, params_t *params)
 {
 	int sum = 0;
+	(void)params;
 
-	while
-		(start <= stop)
-
+	while (start <= stop)
 	{
-		if (start != except)
-			sum += _putchar(*start);
+		sum += _putchar(*start);
 		start++;
 	}
 	return (sum);

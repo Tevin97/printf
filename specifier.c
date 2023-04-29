@@ -10,19 +10,19 @@ int (*get_specifier(char *s))(va_list ap, params_t *params)
 {
 	specifier_t specifiers[] = {
 		{"c", print_char},
-		{"c", print_int},
-		{"c", print_int},
-		{"c", print_string},
-		{"c", print_percent},
-		{"c", print_binary},
-		{"c", print_octal},
-		{"c", print_unsigned},
-		{"c", print_hex},
-		{"c", print_HEX},
-		{"c", print_address},
-		{"c", print_S},
-		{"c", print_rev},
-		{"c", print_rot13},
+		{"i", print_int},
+		{"d", print_int},
+		{"s", print_string},
+		{"%", print_percent},
+		{"b", print_binary},
+		{"o", print_octal},
+		{"u", print_unsigned},
+		{"x", print_hex},
+		{"X", print_HEX},
+		{"p", print_address},
+		{"S", print_S},
+		{"r", print_rev},
+		{"R", print_rot13},
 		{NULL, NULL}
 	};
 	int i = 0;
@@ -64,14 +64,14 @@ int get_print_func(char *s, va_list ap, params_t *params)
 */
 int get_flag(char *s, params_t *params)
 {
-	int i = 0;
+	int i;
 
 	switch (*s)
 	{
 		case '+':
 		i = params->plus_flag = 1;
 		break;
-		case '':
+		case '\0':
 		i = params->space_flag = 1;
 		break;
 		case '#':
@@ -96,7 +96,7 @@ int get_flag(char *s, params_t *params)
 */
 int get_modifier(char *s, params_t *params)
 {
-	int i = 0;
+	int i;
 
 	switch (*s)
 	{

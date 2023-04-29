@@ -10,7 +10,7 @@
  */
 char *get_precision(char *p, params_t *params, va_list ap)
 {
-	int d = 0;
+	int d = -1;
 
 	if (*p != '.')
 		return (p);
@@ -22,8 +22,9 @@ char *get_precision(char *p, params_t *params, va_list ap)
 		d = va_arg(ap, int);
 		p++;
 	}
-	else
+	else if (_isdigit(*p))
 	{
+		d = 0;
 		while (_isdigit(*p))
 		{
 			d = d * 10 + (*p++ - '0');
@@ -34,4 +35,3 @@ char *get_precision(char *p, params_t *params, va_list ap)
 
 	return (p);
 }
-

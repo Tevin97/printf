@@ -1,71 +1,50 @@
-#include 'main.h';
+#include "main.h"
 
 /**
- * _printf - prints output according to a format
- * @format: format string containing zero or more directives
- *
- * Return: number of characters printed, or -1 if there is an error
- */
-
+*_printf - prints anything
+*@format: the format string
+*
+*Return: number of bytes printed
+*/
 int _printf(const char *format, ...)
 {
-	int i = 0, count = 0;
-	va_list args;
-	char c = va_arg(args, int);
-	int num = va_arg(args, int);
-	char *num_str = convert(num, 10, CONVERT_LOWERCASE, NULL);
-	char *str = va_arg(args, char *);
+	int sum = 0;
+	va_list ap;
+	char *p, *start;
+	params_t params = PARAMS_INIT;
 
-	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+	va_start(ap, format);
+
+	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
-	va_start(args, format);
-
-	while (format[i] != '\0')
+	if (format[0] == '%' && format[1] == ' ' &&!format[2])
+		return (-1);
+	for (p = (char *)format; *p; p++)
 	{
-		if (format[i] != '%')
+		init_params(&params, ap);
+		if
+			(*p != '%')
+			{
+				sum += _putchar(*p);
+				continue;
+			}
+		start = p;
+		p++;
+		while (get_flag(p, &params))
 		{
-			_putchar(format[i]);
-			count++;
+			p++;
 		}
+		p = get_width(p, &params, ap);
+		p = get_precision(p, &params, ap);
+		if (get_modifier(p, &params))
+			p++;
+		if (!get_specifier(p))
+			sum += print_from_to(start, p,
+		params.l_modifier || params.h_modifier ? p - 1 : 0);
 		else
-		{
-			i++;
-
-			if (format[i] == '%')
-			{
-				_putchar('%');
-				count++;
-			}
-			else if (format[i] == 'c')
-			{
-				_putchar(c);
-				count++;
-			}
-			else if (format[i] == 's')
-				if (str == NULL)
-				{
-					str = "(null)";
-				}
-			while (*str)
-			{
-				_putchar(*str++);
-				count++;
-			}
-			else if (format[i] == 'd' || format[i] == 'i')
-			{
-				print_from_to(num_str, num_str + _strlen(num_str), NULL);
-				count += _strlen(num_str);
-				free(num_str);
-			}
-			else
-			{
-				_putchar('%');
-				_putchar(format[i]);
-				count += 2;
-			}
-			i++;
-		}
+			sum += get_print_func(p, ap, &params);
 	}
-	va_end(args);
-	return (count);
+	_putchar(BUF_FLUSH);
+	va_end(ap);
+	return (sum);
 }

@@ -129,3 +129,4 @@ int print_number_left_shift(char *str, params_t *params)
 		n += _putchar(pad_char);
 	return (n);
 }
+

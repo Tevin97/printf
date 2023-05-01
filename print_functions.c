@@ -55,7 +55,7 @@ int print_string(va_list ap, params_t *params)
 
 	(void)params;
 	switch ((int)(!str))
-	case 1:
+	case l:
 		str = NULL_STRING;
 
 		j = pad = _strlen(str);
